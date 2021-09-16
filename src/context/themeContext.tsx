@@ -2,23 +2,23 @@ import React from 'react';
 
 export const themeContext = React.createContext({
 	currentTheme: '',
-	themeSwitchHandler: (theme: string) => {},
+	switchThemeHandler: (theme: string) => {},
 });
 
-const ThemeContextProvider = ({ children }) => {
-	const [currentTheme, setCurrentTheme] = React.useState(
+const ThemeContextProvider = ({ children }: any) => {
+	const [currentTheme, setCurrentTheme] = React.useState<string>(
 		window.localStorage.getItem('theme') === null
 			? 'light'
-			: window.localStorage.getItem('theme')
+			: window.localStorage.getItem('theme')!
 	);
 
-	const themeSwitchHandler = (theme: string) => {
-		setCurrentTheme(theme);
+	const switchThemeHandler = (theme: string) => {
+	    setCurrentTheme(theme);
 	};
 
 	return (
 		<themeContext.Provider
-			value={{ currentTheme: currentTheme, themeSwitchHandler }}
+			value={{ currentTheme: currentTheme, switchThemeHandler }}
 		>
             {children}
         </themeContext.Provider>

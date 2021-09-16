@@ -1,38 +1,48 @@
 import React from 'react';
 import { Container, Form, Nav, Navbar } from 'react-bootstrap';
-
+import { themeContext } from '../context/themeContext';
 
 const Header = () => {
-    return (
-        <Navbar bg="info" variant="dark">
-            <Container>
-                <Navbar.Brand href="">Theme Switcher</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                </Nav>
-                <Nav>
-                    <Form>
-                        <Form.Check 
-                            type='radio'
-                            name='theme'
-                            id='theme-checkbox-1'
-                            label='dark'
-                            className='mx-1'
-                            inline
-                        />
-                        <Form.Check 
-                            type='radio'
-                            name='theme'
-                            id='theme-checkbox-2'
-                            label='light'
-                            className='mx-1'
-                            inline
-                        />                        
-                    </Form>
-                </Nav>
-            </Container>
-        </Navbar> 
-    )
-}
+	const { currentTheme, switchThemeHandler } = React.useContext(themeContext);
 
-export default Header
+	React.useEffect(() => {
+		window.localStorage.setItem('theme', currentTheme);
+	});
+
+	return (        
+		<Navbar bg={currentTheme === 'light' ? 'info' : 'dark'} variant='dark'>
+			<Container>
+				<Navbar.Brand href='' style={{ color: currentTheme === 'light' ? '#000' : '#fff' }}>Theme Switcher</Navbar.Brand>
+				<Nav className='me-auto'></Nav>
+				<Nav>
+					<Form>
+						<Form.Check
+							type='radio'
+							checked={currentTheme === 'dark'}
+							name='theme'
+							id='theme-checkbox-1'
+							label='dark'
+							className='mx-1'
+							inline
+							onChange={() => switchThemeHandler('dark')}
+                            style={{ color: currentTheme === 'light' ? '#000' : '#fff' }}
+						/>
+						<Form.Check
+							type='radio'
+							checked={currentTheme === 'light'}
+							name='theme'
+							id='theme-checkbox-2'
+							label='light'
+							className='mx-1'
+							inline
+							onChange={() => switchThemeHandler('light')}
+                            style={{ color: currentTheme === 'light' ? '#000' : '#fff' }}
+						/>
+					</Form>
+				</Nav>
+			</Container>
+		</Navbar>
+	);
+};
+
+export default Header;

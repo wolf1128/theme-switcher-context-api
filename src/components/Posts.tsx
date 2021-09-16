@@ -1,4 +1,5 @@
 import React from 'react';
+import { themeContext } from '../context/themeContext';
 import Post from './Post';
 
 interface PostsProps {
@@ -9,11 +10,13 @@ interface PostsProps {
 }
 
 const Posts = ({ posts }: PostsProps) => {
+    const { currentTheme } = React.useContext(themeContext);
+
     return (
         <div>
-            <h3> Posts </h3>
+            <h3 className='mt-3' style={{ color: currentTheme === 'light' ? '#000' : '#fff' }}> Posts </h3>
             {posts.map(post => (
-                <Post post={post} />
+                <Post key={post.title} post={post} />
             ))}
         </div>
     )
