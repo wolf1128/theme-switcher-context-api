@@ -7,3 +7,4 @@ We build a page include some posts with static data and implement the theme swit
 
 - First install the dependencies using `npm install`
 - The application should be started with `npm start`
+- Styling is done using the [react-bootstrap](https://react-bootstrap.github.io/)
