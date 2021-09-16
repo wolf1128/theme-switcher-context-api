@@ -1,8 +1,10 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './App.css';
-import Header from './components/Header'
-import Post from './components/Post'
+import Header from './components/Header';
+import Posts from './components/Posts';
+import { posts } from './data/Posts';
+
 
 function App() {
   return (
@@ -12,8 +14,7 @@ function App() {
       </Row>
       <Row className='my-3'>
         <Col>
-          <h3> Posts </h3>
-          <Post />
+          <Posts posts={posts} />
         </Col>
       </Row>
     </Container>
